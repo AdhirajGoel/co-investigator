@@ -1,0 +1,77 @@
+[
+  {
+    "source_skill": "read-pdf",
+    "asset": "SKILL.md",
+    "source_sha256": "cd2ea9f0dc789b14dfabf196e8e433813c7546d82976577458d3c490594a1d83"
+  },
+  {
+    "source_skill": "read-pdf",
+    "asset": "pdf_cache.py",
+    "source_sha256": "46bd4f05dbde65e4eb27316d15f0dbae95015bb70b4d756fd161d1e1cc13af34"
+  },
+  {
+    "source_skill": "read-pdf",
+    "asset": "extract_tables.py",
+    "source_sha256": "fe49410ddafdb3cc965120cc9084c25b906817d2f844ce3d377ecd66b8425536"
+  },
+  {
+    "source_skill": "read-pdf",
+    "asset": "test_pdf_cache.py",
+    "source_sha256": "acb88d6a1e97a69eeb7d13b2cbaa5b377e892d79b1c7f98d0bd8533b252c1b7a"
+  },
+  {
+    "source_skill": "citation-validation",
+    "asset": "SKILL.md",
+    "source_sha256": "e627b6daebc3ff33a0c4d91cc667c434ca1b8a1bd0c232388485b2fdf0cf44c7"
+  },
+  {
+    "source_skill": "adversarial-peer-review",
+    "asset": "SKILL.md",
+    "source_sha256": "224ff88609a57c84607125a38189df49f6b4a0eaeeb8421399cf2614886499cb"
+  },
+  {
+    "source_skill": "sgrna-sequence-verification",
+    "asset": "scripts/verify_sgRNA.py",
+    "source_sha256": "502242fd329f7f4dd3dd8fffbe31368a1c7f85fbe3dfbfd06acf93c645e51f4e"
+  },
+  {
+    "source_skill": "literature-pdf-download",
+    "asset": "scripts/get_routes.py",
+    "source_sha256": "ae7c2d90359cda0a5eb122ae577952200f4b95137754af023d152e0d4fec1fdb"
+  },
+  {
+    "source_skill": "literature-pdf-download",
+    "asset": "scripts/fetch_oa.py",
+    "source_sha256": "674271db5cd4f5b7fa79322026d2a6def0d953828dc2eddbf4e0456e7805f24f"
+  },
+  {
+    "source_skill": "literature-pdf-download",
+    "asset": "scripts/browser_grab.mjs",
+    "source_sha256": "decb4c50ef175cb068ea77ddfbdc297ce495526d3b52f669b2e1d25a1151a93b"
+  },
+  {
+    "source_skill": "literature-pdf-download",
+    "asset": "scripts/launch_chrome.sh",
+    "source_sha256": "c5b23d459bf2d63c6a2356083c3558d17a246723acf0b911c56ef8b314dc6f92"
+  },
+  {
+    "source_skill": "literature-pdf-download",
+    "asset": "package.json",
+    "source_sha256": "15fbdf38843fb1ec3c67db03dd6474955b1c3dbb5e6f955341417ae020760f65"
+  },
+  {
+    "source_skill": "literature-pdf-download",
+    "asset": "package-lock.json",
+    "source_sha256": "04a4007cf102e6e0a3e4d87e4def466b45f2f2dfed3b59cb65c670728bf9a90c"
+  },
+  {
+    "source_skill": "writing-style",
+    "asset": "references/general-writing.md",
+    "source_sha256": "7689bbaa3531362bb3edfa867c81dd7f126e65faea5dca8deb5d3fa022e03afa"
+  },
+  {
+    "source_skill": "writing-style",
+    "asset": "references/life-sciences-writing.md",
+    "source_sha256": "773497966cb4af33e26d4e74a6950c65e11e4f57ad5fb393deab688b42d6a655"
+  }
+]

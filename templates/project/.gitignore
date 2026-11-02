@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+.env
+.env.*
+*.session
+*.log
+.claude/settings.local.json
+projects/
+
+data/
+literature/**/*.pdf
+literature/**/routes.json
+literature/**/records.json
+literature/**/manifest.json
