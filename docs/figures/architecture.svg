@@ -51,6 +51,7 @@
 <polygon points="900,480 904.0,471.0 896.0,471.0" fill="#71818c"/>
 <polyline points="680,512 750,512" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
 <polygon points="750,512 741.0,508.0 741.0,516.0" fill="#71818c"/>
+<polygon points="680,512 689.0,516.0 689.0,508.0" fill="#71818c"/>
 <text x="715" y="575" font-size="23" font-weight="normal" fill="#54636d" text-anchor="middle">Extend and apply project tools</text>
 <rect x="380" y="602" width="300" height="88" rx="2" fill="#f8ede7" stroke="#b9c5cc" stroke-width="1.6"/>
 <text x="530.0" y="640.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Scientific tool</text>

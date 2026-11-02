@@ -94,7 +94,7 @@ def build():
     arrow([(530, 454), (530, 480)])
     arrow([(680, 422), (750, 422)], both=True)
     arrow([(900, 454), (900, 480)])
-    arrow([(680, 512), (750, 512)])
+    arrow([(680, 512), (750, 512)], both=True)
     text(715, 575, 'Extend and apply project tools', 23, color=MUTED, anchor='middle')
     node(380, 602, 300, 88, ['Scientific tool', 'building'])
     node(750, 602, 300, 88, ['sgRNA sequence', 'verification'])
