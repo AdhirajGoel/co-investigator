@@ -1,42 +1,29 @@
 # Co-Investigator
 
-A configurable scientific collaboration workspace for experimental scientists working with Codex or Claude Code. The scientist sets the questions, evidence standards, and working methods. The agent helps research, build tools, analyze results, and keep the project’s understanding current.
+Co-Investigator contains nine scientific skills and a project structure for experimental scientists working with Codex or Claude Code. It connects a research question to the papers, hypotheses, experiment plans, analyses, and decisions behind the next experiment.
 
-This framework grew out of day-to-day experimental biology work where a fixed research assistant offered too little control over methods and outputs. It packages the reusable collaboration structure and scientific skills. The original project’s research content and data are excluded.
+The agent helps inspect papers, develop testable explanations, and plan experiments with the scientist. The scientist performs the experiments and supplies the observations. The agent can then analyze the results, compare them with earlier predictions, and record what changed in the interpretation and why. Project context links to the evidence and decisions a later session needs to continue the work.
+
+The system diagram connects the scientist and coding agent to project records, tools, and requested independent review.
+
+![Co-Investigator: scientist and agent collaboration, persistent project records, and independent review](docs/figures/architecture.png)
+
+*The scientist directs the agent’s work and controls consequential decisions. The [architecture guide](docs/architecture.md) explains the components and includes editable SVG and vector PDF versions.*
 
 ## Start with your agent
 
-Give Codex or Claude Code the repository URL or local folder and say:
+In an installed, signed-in Codex or Claude Code session, say:
 
-> Set up this framework for my research project. Follow START_HERE.md, ask me for the project-specific decisions, and configure the workspace for how I want to work.
+> Set up https://github.com/AdhirajGoel/co-investigator for my research project. Follow START_HERE.md and ask me for the project-specific decisions.
 
-The agent handles the commands. You choose the research question, where files live, how much initiative the agent takes, how review works, and which tools to add. Setup targets macOS with Python 3.10 or newer and an installed, signed-in coding agent. It creates a separate project folder and leaves the template intact.
-
-## What it provides
-
-- **Literature with provenance.** Retrieve papers, keep a record of download attempts and source identifiers, read PDFs by page, and link claims to inspected evidence.
-- **A controllable scientific workflow.** Develop competing hypotheses and discriminating tests, preserve your experimental records, and keep agent interpretations separate from observations.
-- **Independent review.** Request a two-round review across evidence, methods, and interpretation, with a record of accepted and declined critiques.
-- **Tools that grow with the project.** Ask for a primer-design script, analysis workflow, or other utility. The agent establishes its inputs and assumptions, checks it, and registers it alongside the work that uses it.
-- **Continuity across sessions.** A compact current-context file links to the evidence and decisions that matter now; older conclusions remain traceable.
-
-![Scientist-directed research cycle, project records, and independent review](docs/figures/architecture.png)
-
-The [architecture guide](docs/architecture.md) maps this workflow to the implementation and includes editable SVG and vector PDF versions.
+Setup targets macOS with Python 3.10 or newer. Your agent follows [the setup procedure](START_HERE.md), creates a separate project folder, and records your choices about models, review depth, spending, sharing, and how much initiative it should take.
 
 ## Working together
 
-You can ask: “Read these papers and show which evidence supports each explanation,” “Compare these results with our predictions,” or “Add a tool for this repeated calculation.” Change the collaboration rules in ordinary language. The agent records your choice in `context/collaboration.md` so the next session follows it.
+Ask in ordinary language: “Read these papers and show which evidence supports each explanation,” “Compare these results with our predictions,” or “Add a tool for this repeated calculation.” The [included skills](docs/skills.md) cover literature, experiment planning and interpretation, writing, citation checks, independent review, and tool building, with utilities for PDF reading and sequence verification.
 
-The [skill guide](docs/skills.md) explains the included capabilities. [Collaboration](docs/collaboration.md) describes the records and control points. [Setup](START_HERE.md) contains the agent’s onboarding procedure.
+You can change the [collaboration rules](docs/collaboration.md) as the project develops. When you need another script or skill, describe its task; the agent establishes its inputs and assumptions, checks it, and records how to use it.
 
-## Check the framework
+Co-Investigator grew out of experimental biology work. This release excludes the original study’s source material, data, and findings, and includes no scientific demo. [Developer checks](docs/development.md) use disposable software fixtures.
 
-```sh
-python3 tools/workspace.py check .
-python3 -m unittest discover -s tests -v
-```
-
-These checks exercise workspace creation and tools with disposable software fixtures. There is no scientific demo or example research dataset.
-
-[MIT license](LICENSE). This is a static release; it carries no ongoing maintenance commitment.
+[MIT license](LICENSE). This is a static release with no ongoing maintenance commitment.

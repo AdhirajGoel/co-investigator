@@ -1,109 +1,144 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1080" viewBox="0 0 1200 1080" role="img" aria-labelledby="title desc">
-<title id="title">Scientist-directed collaboration architecture</title><desc id="desc">Three panels show an iterative research workflow, scientist control through host agents and durable project records, and an optional two-round independent review process. The workflow is instructional and host-mediated, not an automated research service.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1040" viewBox="0 0 1440 1040" role="img" aria-labelledby="title desc">
+<title id="title">Co-Investigator architecture</title><desc id="desc">A scientist directs Codex or Claude Code through goals, methods, preferences, and feedback. The host applies interacting scientific skills, invokes executable tools, and maintains project context linked to preserved evidence. Plans and interpretation return to the scientist. Independent reviewers operate in separate contexts on request. The scientist performs experiments and supplies observations.</desc>
 <g font-family="Helvetica, Arial, sans-serif">
-<rect x="0" y="0" width="1200" height="1080" rx="0" fill="#ffffff" stroke="#ffffff"/>
-<rect x="16" y="12" width="1168" height="290" rx="12" fill="#ffffff" stroke="#ccd7dd"/>
-<text x="35" y="44" font-size="26" font-weight="bold" fill="#173042" text-anchor="start">a</text>
-<text x="72" y="44" font-size="23" font-weight="bold" fill="#173042" text-anchor="start">Research cycle directed by the scientist</text>
-<text x="36" y="78" font-size="20" font-weight="normal" fill="#173042" text-anchor="start">The scientist sets the question, methods, acceptance criteria, and next decision.</text>
-<rect x="36" y="105" width="177" height="116" rx="10" fill="#eaf2f8" stroke="#c4d0d8"/>
-<text x="124.5" y="135" font-size="18" font-weight="bold" fill="#173042" text-anchor="middle">Inspect evidence</text>
-<text x="124.5" y="167" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">Literature and</text>
-<text x="124.5" y="192" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">source records</text>
-<polyline points="213,163 226,163" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="226,163 217.0,159.0 217.0,167.0" fill="#6a7f8d"/>
-<rect x="226" y="105" width="177" height="116" rx="10" fill="#eaf2f8" stroke="#c4d0d8"/>
-<text x="314.5" y="135" font-size="18" font-weight="bold" fill="#173042" text-anchor="middle">Compare ideas</text>
-<text x="314.5" y="167" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">Alternatives and</text>
-<text x="314.5" y="192" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">predictions</text>
-<polyline points="403,163 416,163" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="416,163 407.0,159.0 407.0,167.0" fill="#6a7f8d"/>
-<rect x="416" y="105" width="177" height="116" rx="10" fill="#fff2db" stroke="#c4d0d8"/>
-<text x="504.5" y="135" font-size="18" font-weight="bold" fill="#173042" text-anchor="middle">Agree a plan</text>
-<text x="504.5" y="167" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">Controls, endpoint,</text>
-<text x="504.5" y="192" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">replication</text>
-<polyline points="593,163 606,163" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="606,163 597.0,159.0 597.0,167.0" fill="#6a7f8d"/>
-<rect x="606" y="105" width="177" height="116" rx="10" fill="#e8f4f0" stroke="#c4d0d8"/>
-<text x="694.5" y="135" font-size="18" font-weight="bold" fill="#173042" text-anchor="middle">Run experiment</text>
-<text x="694.5" y="167" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">Scientist performs</text>
-<text x="694.5" y="192" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">the experiment</text>
-<polyline points="783,163 796,163" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="796,163 787.0,159.0 787.0,167.0" fill="#6a7f8d"/>
-<rect x="796" y="105" width="177" height="116" rx="10" fill="#eaf2f8" stroke="#c4d0d8"/>
-<text x="884.5" y="135" font-size="18" font-weight="bold" fill="#173042" text-anchor="middle">Interpret results</text>
-<text x="884.5" y="167" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">Analysis linked to</text>
-<text x="884.5" y="192" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">primary records</text>
-<polyline points="973,163 986,163" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="986,163 977.0,159.0 977.0,167.0" fill="#6a7f8d"/>
-<rect x="986" y="105" width="177" height="116" rx="10" fill="#eaf2f8" stroke="#c4d0d8"/>
-<text x="1074.5" y="135" font-size="18" font-weight="bold" fill="#173042" text-anchor="middle">Update context</text>
-<text x="1074.5" y="167" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">Current view and</text>
-<text x="1074.5" y="192" font-size="17" font-weight="normal" fill="#173042" text-anchor="middle">next question</text>
-<polyline points="1074,222 1074,269 124,269 124,222" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="124,222 120.0,231.0 128.0,231.0" fill="#6a7f8d"/>
-<rect x="364" y="251" width="470" height="35" rx="0" fill="#ffffff" stroke="#ffffff"/>
-<text x="599" y="275" font-size="19" font-weight="normal" fill="#173042" text-anchor="middle">New evidence informs the next question</text>
-<rect x="16" y="318" width="1168" height="414" rx="12" fill="#ffffff" stroke="#ccd7dd"/>
-<text x="35" y="350" font-size="26" font-weight="bold" fill="#173042" text-anchor="start">b</text>
-<text x="72" y="350" font-size="23" font-weight="bold" fill="#173042" text-anchor="start">Scientist control, host execution, and persistent records</text>
-<rect x="36" y="383" width="290" height="232" rx="10" fill="#fff2db" stroke="#c4d0d8"/>
-<text x="54" y="414" font-size="18" font-weight="bold" fill="#173042" text-anchor="start">SCIENTIST</text>
-<text x="54" y="451" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Scientific choices</text>
-<text x="54" y="483" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Methods and evidence standards</text>
-<text x="54" y="515" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Outputs and review preferences</text>
-<text x="54" y="547" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Models, permissions, spending</text>
-<text x="54" y="598" font-size="17" font-weight="normal" fill="#4d6372" text-anchor="start">Recorded in collaboration.md</text>
-<rect x="431" y="383" width="318" height="232" rx="10" fill="#eaf2f8" stroke="#c4d0d8"/>
-<text x="449" y="414" font-size="18" font-weight="bold" fill="#173042" text-anchor="start">HOST: CODEX / CLAUDE CODE</text>
-<text x="449" y="450" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Conversation and reasoning</text>
-<text x="449" y="482" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Project skills: instructions</text>
-<text x="449" y="514" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Utilities: executable code</text>
-<text x="449" y="546" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Available tools and permissions</text>
-<text x="449" y="598" font-size="17" font-weight="normal" fill="#4d6372" text-anchor="start">Reads files and performs tasks</text>
-<rect x="854" y="383" width="310" height="232" rx="10" fill="#e8f4f0" stroke="#c4d0d8"/>
-<text x="872" y="414" font-size="18" font-weight="bold" fill="#173042" text-anchor="start">DURABLE PROJECT FILES</text>
-<text x="872" y="450" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Preferences and decisions</text>
-<text x="872" y="482" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Current view and task log</text>
-<text x="872" y="514" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Evidence and primary records</text>
-<text x="872" y="546" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Analyses and review records</text>
-<text x="872" y="598" font-size="17" font-weight="normal" fill="#4d6372" text-anchor="start">Context links to detailed evidence</text>
-<polyline points="326,482 431,482" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="431,482 422.0,478.0 422.0,486.0" fill="#6a7f8d"/>
-<text x="378" y="465" font-size="16" font-weight="normal" fill="#173042" text-anchor="middle">directs</text>
-<polyline points="749,471 854,471" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="854,471 845.0,467.0 845.0,475.0" fill="#6a7f8d"/>
-<text x="801" y="431" font-size="16" font-weight="normal" fill="#173042" text-anchor="middle">writes</text>
-<text x="801" y="451" font-size="16" font-weight="normal" fill="#173042" text-anchor="middle">outputs</text>
-<polyline points="854,540 749,540" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="749,540 758.0,544.0 758.0,536.0" fill="#6a7f8d"/>
-<text x="801" y="565" font-size="16" font-weight="normal" fill="#173042" text-anchor="middle">reads</text>
-<rect x="36" y="639" width="1128" height="70" rx="10" fill="#f6f8fa" stroke="#c4d0d8"/>
-<text x="54" y="667" font-size="17" font-weight="bold" fill="#173042" text-anchor="start">EXTEND THE PROJECT</text>
-<text x="54" y="692" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Describe a task → add or adapt a skill/tool → check its behavior → register inputs, assumptions, and use</text>
-<rect x="16" y="748" width="1168" height="287" rx="12" fill="#ffffff" stroke="#ccd7dd"/>
-<text x="35" y="780" font-size="26" font-weight="bold" fill="#173042" text-anchor="start">c</text>
-<text x="72" y="780" font-size="23" font-weight="bold" fill="#173042" text-anchor="start">Independent review on request</text>
-<text x="36" y="811" font-size="19" font-weight="normal" fill="#173042" text-anchor="start">Scientist selects scope, depth, and models; the host provides separate reviewer contexts.</text>
-<rect x="36" y="836" width="353" height="112" rx="10" fill="#eaf2f8" stroke="#c4d0d8"/>
-<text x="54" y="865" font-size="17" font-weight="bold" fill="#173042" text-anchor="start">THREE INDEPENDENT LENSES</text>
-<text x="54" y="895" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Evidence • Methods • Interpretation</text>
-<text x="54" y="922" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Each reviewer works separately</text>
-<rect x="434" y="836" width="324" height="112" rx="10" fill="#fff2db" stroke="#c4d0d8"/>
-<text x="452" y="865" font-size="17" font-weight="bold" fill="#173042" text-anchor="start">EDITORIAL DECISION</text>
-<text x="452" y="895" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Accept, partly accept, or decline</text>
-<text x="452" y="922" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Record evidence and rationale</text>
-<rect x="803" y="836" width="361" height="112" rx="10" fill="#e8f4f0" stroke="#c4d0d8"/>
-<text x="821" y="865" font-size="17" font-weight="bold" fill="#173042" text-anchor="start">REVISION AND RESPONSE</text>
-<text x="821" y="895" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Apply and verify accepted changes</text>
-<text x="821" y="922" font-size="18" font-weight="normal" fill="#173042" text-anchor="start">Preserve the response ledger</text>
-<polyline points="389,891 434,891" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="434,891 425.0,887.0 425.0,895.0" fill="#6a7f8d"/>
-<polyline points="758,891 803,891" fill="none" stroke="#6a7f8d" stroke-width="2"/>
-<polygon points="803,891 794.0,887.0 794.0,895.0" fill="#6a7f8d"/>
-<polyline points="983,949 983,999 212,999 212,949" fill="none" stroke="#6a7f8d" stroke-width="2" stroke-dasharray="6 5"/>
-<polygon points="212,949 208.0,958.0 216.0,958.0" fill="#6a7f8d"/>
-<rect x="310" y="979" width="580" height="35" rx="0" fill="#ffffff" stroke="#ffffff"/>
-<text x="600" y="1003" font-size="18" font-weight="normal" fill="#173042" text-anchor="middle">Round 2: new independent reviewers reassess the revision</text>
-<text x="600" y="1066" font-size="17" font-weight="normal" fill="#4d6372" text-anchor="middle">Arrows describe agent-followed procedures.</text>
+<rect x="0" y="0" width="1440" height="1040" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.6"/>
+<rect x="330" y="80" width="780" height="650" rx="12" fill="#ffffff" stroke="#8798a4" stroke-width="1.6"/>
+<text x="720" y="54" font-size="34" font-weight="bold" fill="#24333e" text-anchor="middle">Co-Investigator</text>
+<rect x="390" y="115" width="650" height="90" rx="3" fill="#e8edf1" stroke="#8fa1ae" stroke-width="1.6"/>
+<text x="715" y="150" font-size="29" font-weight="bold" fill="#24333e" text-anchor="middle">Codex / Claude Code</text>
+<text x="715" y="182" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Conversation · reasoning · tool execution</text>
+<text x="720" y="245" font-size="23" font-weight="normal" fill="#54636d" text-anchor="middle">Applies task-relevant skills</text>
+<polyline points="715,205 715,216" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polyline points="355,266 1085,266" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polyline points="715,253 715,266" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="715,266 719.0,257.0 711.0,257.0" fill="#71818c"/>
+<polyline points="355,266 355,646" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polyline points="1085,266 1085,646" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polyline points="355,332 380,332" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="380,332 371.0,328.0 371.0,336.0" fill="#71818c"/>
+<polyline points="355,422 380,422" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="380,422 371.0,418.0 371.0,426.0" fill="#71818c"/>
+<polyline points="355,512 380,512" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="380,512 371.0,508.0 371.0,516.0" fill="#71818c"/>
+<polyline points="355,646 380,646" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="380,646 371.0,642.0 371.0,650.0" fill="#71818c"/>
+<polyline points="1085,397 1050,397" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="1050,397 1059.0,401.0 1059.0,393.0" fill="#71818c"/>
+<polyline points="1085,512 1050,512" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="1050,512 1059.0,516.0 1059.0,508.0" fill="#71818c"/>
+<polyline points="1085,646 1050,646" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="1050,646 1059.0,650.0 1059.0,642.0" fill="#71818c"/>
+<rect x="380" y="300" width="300" height="64" rx="2" fill="#f8ede7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="530.0" y="340.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Retrieve &amp; read papers</text>
+<rect x="380" y="390" width="300" height="64" rx="2" fill="#f8ede7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="530.0" y="430.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Literature synthesis</text>
+<rect x="380" y="480" width="300" height="64" rx="2" fill="#f8ede7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="530.0" y="520.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Citation validation</text>
+<rect x="750" y="300" width="300" height="154" rx="2" fill="#f8ede7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="900.0" y="357.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Experiment cycle</text>
+<text x="900.0" y="385.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Plan · predict</text>
+<text x="900.0" y="413.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Analyze · interpret</text>
+<rect x="750" y="480" width="300" height="64" rx="2" fill="#f8ede7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="900.0" y="520.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Scientific writing</text>
+<polyline points="530,364 530,390" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="530,390 534.0,381.0 526.0,381.0" fill="#71818c"/>
+<polyline points="530,454 530,480" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="530,480 534.0,471.0 526.0,471.0" fill="#71818c"/>
+<polyline points="680,422 750,422" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="750,422 741.0,418.0 741.0,426.0" fill="#71818c"/>
+<polygon points="680,422 689.0,426.0 689.0,418.0" fill="#71818c"/>
+<polyline points="900,454 900,480" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="900,480 904.0,471.0 896.0,471.0" fill="#71818c"/>
+<polyline points="680,512 750,512" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="750,512 741.0,508.0 741.0,516.0" fill="#71818c"/>
+<text x="715" y="575" font-size="23" font-weight="normal" fill="#54636d" text-anchor="middle">Extend and apply project tools</text>
+<rect x="380" y="602" width="300" height="88" rx="2" fill="#f8ede7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="530.0" y="640.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">Scientific tool</text>
+<text x="530.0" y="668.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">building</text>
+<rect x="750" y="602" width="300" height="88" rx="2" fill="#f8ede7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="900.0" y="640.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">sgRNA sequence</text>
+<text x="900.0" y="668.16" font-size="24" font-weight="normal" fill="#24333e" text-anchor="middle">verification</text>
+<text x="715" y="716" font-size="22" font-weight="normal" fill="#54636d" text-anchor="middle">Project-local skills · shared across both hosts</text>
+<text x="145" y="54" font-size="29" font-weight="bold" fill="#24333e" text-anchor="middle">Scientist</text>
+<rect x="30" y="95" width="235" height="205" rx="2" fill="#e8f0f9" stroke="#aac0d6" stroke-width="1.6"/>
+<text x="147" y="132" font-size="24" font-weight="bold" fill="#24333e" text-anchor="middle">Research direction</text>
+<text x="147" y="173" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Question &amp; goals</text>
+<text x="147" y="205" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Methods &amp; preferences</text>
+<text x="147" y="237" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Models &amp; permissions</text>
+<text x="147" y="269" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Feedback &amp; decisions</text>
+<polyline points="265,160 390,160" fill="none" stroke="#5e7f9e" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="390,160 381.0,156.0 381.0,164.0" fill="#5e7f9e"/>
+<text x="327" y="143" font-size="22" font-weight="normal" fill="#5e7f9e" text-anchor="middle">request</text>
+<circle cx="145" cy="365" r="22" fill="#9ab7d1"/>
+<path d="M105 428 L105 412 C105 386 185 386 185 412 L185 428 Z" fill="#9ab7d1"/>
+<polyline points="145,342 145,300" fill="none" stroke="#5e7f9e" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="145,300 141.0,309.0 149.0,309.0" fill="#5e7f9e"/>
+<rect x="30" y="520" width="235" height="108" rx="2" fill="#e8f0f9" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="147.5" y="553.82" font-size="23" font-weight="normal" fill="#24333e" text-anchor="middle">Plans &amp; hypotheses</text>
+<text x="147.5" y="581.82" font-size="23" font-weight="normal" fill="#24333e" text-anchor="middle">Analyses &amp;</text>
+<text x="147.5" y="609.82" font-size="23" font-weight="normal" fill="#24333e" text-anchor="middle">interpretation</text>
+<polyline points="390,185 290,185 290,574 265,574" fill="none" stroke="#5e7f9e" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="265,574 274.0,578.0 274.0,570.0" fill="#5e7f9e"/>
+<polyline points="145,520 145,440" fill="none" stroke="#5e7f9e" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="145,440 141.0,449.0 149.0,449.0" fill="#5e7f9e"/>
+<text x="162" y="480" font-size="22" font-weight="normal" fill="#5e7f9e" text-anchor="start">discuss</text>
+<rect x="30" y="725" width="235" height="85" rx="2" fill="#e8f0f9" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="147.5" y="761.32" font-size="23" font-weight="normal" fill="#24333e" text-anchor="middle">Experiments</text>
+<text x="147.5" y="789.32" font-size="23" font-weight="normal" fill="#24333e" text-anchor="middle">Scientist executes</text>
+<polyline points="105,410 14,410 14,768 30,768" fill="none" stroke="#5e7f9e" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="30,768 21.0,764.0 21.0,772.0" fill="#5e7f9e"/>
+<rect x="1175" y="110" width="245" height="230" rx="2" fill="#eef0f2" stroke="#a6afb8" stroke-width="1.6"/>
+<text x="1297" y="143" font-size="24" font-weight="bold" fill="#24333e" text-anchor="middle">Executable tools</text>
+<polyline points="1175,160 1420,160" fill="none" stroke="#b7c0c7" stroke-width="1.8" stroke-linejoin="round"/>
+<text x="1297" y="196" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">PDF retrieval</text>
+<text x="1297" y="233" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Text / table extraction</text>
+<text x="1297" y="270" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Sequence checks</text>
+<text x="1297" y="307" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">New project tools</text>
+<polyline points="1040,160 1175,160" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="1175,160 1166.0,156.0 1166.0,164.0" fill="#71818c"/>
+<polygon points="1040,160 1049.0,164.0 1049.0,156.0" fill="#71818c"/>
+<text x="1107" y="136" font-size="22" font-weight="normal" fill="#54636d" text-anchor="middle">uses</text>
+<rect x="1175" y="465" width="245" height="198" rx="2" fill="#eaf3ed" stroke="#a2bba9" stroke-width="1.6"/>
+<text x="1297" y="501" font-size="24" font-weight="bold" fill="#24333e" text-anchor="middle">Project memory</text>
+<polyline points="1175,516 1420,516" fill="none" stroke="#b0c8b6" stroke-width="1.8" stroke-linejoin="round"/>
+<text x="1297" y="549" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Context &amp; preferences</text>
+<text x="1297" y="584" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Decisions &amp; task log</text>
+<text x="1297" y="619" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Outputs &amp; provenance</text>
+<polyline points="1040,190 1148,190 1148,565 1175,565" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="1175,565 1166.0,561.0 1166.0,569.0" fill="#71818c"/>
+<polygon points="1040,190 1049.0,194.0 1049.0,186.0" fill="#71818c"/>
+<text x="1297" y="425" font-size="22" font-weight="normal" fill="#54636d" text-anchor="middle">Reads / maintains</text>
+<text x="1297" y="452" font-size="22" font-weight="normal" fill="#54636d" text-anchor="middle">durable files</text>
+<rect x="1175" y="735" width="245" height="112" rx="2" fill="#eaf3ed" stroke="#a2bba9" stroke-width="1.6"/>
+<text x="1297" y="769" font-size="24" font-weight="bold" fill="#24333e" text-anchor="middle">Primary evidence</text>
+<text x="1297" y="806" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Literature · raw data</text>
+<text x="1297" y="833" font-size="22" font-weight="normal" fill="#24333e" text-anchor="middle">Experimental records</text>
+<polyline points="1297,735 1297,663" fill="none" stroke="#71818c" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="1297,663 1293.0,672.0 1301.0,672.0" fill="#71818c"/>
+<text x="1313" y="705" font-size="22" font-weight="normal" fill="#54636d" text-anchor="start">informs</text>
+<polyline points="145,810 145,1006 1297,1006 1297,847" fill="none" stroke="#5e7f9e" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="1297,847 1293.0,856.0 1301.0,856.0" fill="#5e7f9e"/>
+<rect x="563" y="990" width="320" height="32" rx="0" fill="#ffffff" stroke="#ffffff" stroke-width="1.6"/>
+<text x="723" y="1014" font-size="22" font-weight="normal" fill="#5e7f9e" text-anchor="middle">Supplied observations &amp; data</text>
+<rect x="380" y="808" width="670" height="152" rx="7" fill="#ffffff" stroke="#9b91af" stroke-width="1.6" stroke-dasharray="7 5"/>
+<text x="715" y="781" font-size="26" font-weight="bold" fill="#695b80" text-anchor="middle">Independent review · on request</text>
+<rect x="400" y="829" width="190" height="47" rx="2" fill="#f0edf7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="495.0" y="860.32" font-size="23" font-weight="normal" fill="#24333e" text-anchor="middle">Evidence</text>
+<polyline points="495,876 495,899" fill="none" stroke="#8d829f" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="495,899 499.0,890.0 491.0,890.0" fill="#8d829f"/>
+<rect x="620" y="829" width="190" height="47" rx="2" fill="#f0edf7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="715.0" y="860.32" font-size="23" font-weight="normal" fill="#24333e" text-anchor="middle">Methods</text>
+<polyline points="715,876 715,899" fill="none" stroke="#8d829f" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="715,899 719.0,890.0 711.0,890.0" fill="#8d829f"/>
+<rect x="840" y="829" width="190" height="47" rx="2" fill="#f0edf7" stroke="#b9c5cc" stroke-width="1.6"/>
+<text x="935.0" y="860.32" font-size="23" font-weight="normal" fill="#24333e" text-anchor="middle">Interpretation</text>
+<polyline points="935,876 935,899" fill="none" stroke="#8d829f" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="935,899 939.0,890.0 931.0,890.0" fill="#8d829f"/>
+<rect x="400" y="899" width="630" height="40" rx="2" fill="#f0edf7" stroke="#c7bfd4" stroke-width="1.6"/>
+<text x="715" y="927" font-size="23" font-weight="normal" fill="#24333e" text-anchor="middle">Editorial decisions &amp; response ledger</text>
+<text x="715" y="988" font-size="22" font-weight="normal" fill="#695b80" text-anchor="middle">Two rounds; new reviewer contexts in round 2</text>
+<polyline points="410,205 410,224 310,224 310,854 380,854" fill="none" stroke="#8d829f" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<polygon points="380,854 371.0,850.0 371.0,858.0" fill="#8d829f"/>
+<polyline points="1050,919 1130,919 1130,213 1000,213 1000,205" fill="none" stroke="#8d829f" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<polygon points="1000,205 996.0,214.0 1004.0,214.0" fill="#8d829f"/>
 </g></svg>

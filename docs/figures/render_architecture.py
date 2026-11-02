@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the editable architecture SVG; --render also writes PDF and PNG."""
+"""Rebuild the Co-Investigator SVG; --render also writes PDF and PNG."""
 import argparse
 from html import escape
 from pathlib import Path
@@ -8,18 +8,19 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 OUT = Path(__file__).resolve().parent
-W, H = 1200, 1080
-INK, MUTED, LINE = '#173042', '#4d6372', '#6a7f8d'
-BLUE, TEAL, GOLD = '#eaf2f8', '#e8f4f0', '#fff2db'
+W, H = 1440, 1040
+INK, MUTED, LINE = '#24333e', '#54636d', '#71818c'
+HUMAN, SKILL, TOOL, RECORD, REVIEW = '#e8f0f9', '#f8ede7', '#eef0f2', '#eaf3ed', '#f0edf7'
 parts = []
 
 
-def rect(x, y, w, h, fill, stroke='#c4d0d8', radius=10):
+def rect(x, y, w, h, fill, stroke='#b9c5cc', radius=2, dashed=False):
     assert 0 <= x <= W-w and 0 <= y <= H-h
-    parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{radius}" fill="{fill}" stroke="{stroke}"/>')
+    dash = ' stroke-dasharray="7 5"' if dashed else ''
+    parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{radius}" fill="{fill}" stroke="{stroke}" stroke-width="1.6"{dash}/>')
 
 
-def text(x, y, lines, size=20, bold=False, color=INK, anchor='start', gap=27):
+def text(x, y, lines, size=24, bold=False, color=INK, anchor='start', gap=29):
     if isinstance(lines, str):
         lines = [lines]
     for i, line in enumerate(lines):
@@ -27,104 +28,138 @@ def text(x, y, lines, size=20, bold=False, color=INK, anchor='start', gap=27):
         parts.append(f'<text x="{x}" y="{y+i*gap}" font-size="{size}" font-weight="{"bold" if bold else "normal"}" fill="{color}" text-anchor="{anchor}">{escape(line)}</text>')
 
 
-def arrow(points, color=LINE, dashed=False):
-    assert len(points) >= 2
+def line(points, color=LINE, dashed=False):
     for x, y in points:
         assert 0 <= x <= W and 0 <= y <= H
-    points_str = ' '.join(f'{x},{y}' for x, y in points)
     dash = ' stroke-dasharray="6 5"' if dashed else ''
-    parts.append(f'<polyline points="{points_str}" fill="none" stroke="{color}" stroke-width="2"{dash}/>')
-    (ax, ay), (bx, by) = points[-2:]
-    dx, dy = bx-ax, by-ay
-    length = (dx*dx+dy*dy)**0.5
-    assert length > 0
-    ux, uy = dx/length, dy/length
-    triangle = f'{bx},{by} {bx-9*ux+4*uy},{by-9*uy-4*ux} {bx-9*ux-4*uy},{by-9*uy+4*ux}'
-    parts.append(f'<polygon points="{triangle}" fill="{color}"/>')
+    coords = ' '.join(f'{x},{y}' for x, y in points)
+    parts.append(f'<polyline points="{coords}" fill="none" stroke="{color}" stroke-width="1.8" stroke-linejoin="round"{dash}/>')
 
 
-def panel(letter, title, top, height):
-    rect(16, top, 1168, height, '#ffffff', '#ccd7dd', 12)
-    text(35, top+32, letter, 26, True)
-    text(72, top+32, title, 23, True)
+def arrow(points, color=LINE, dashed=False, both=False):
+    assert len(points) >= 2
+    line(points, color, dashed)
+    ends = [(points[-2], points[-1])]
+    if both:
+        ends.append((points[1], points[0]))
+    for (ax, ay), (bx, by) in ends:
+        dx, dy = bx-ax, by-ay
+        length = (dx*dx+dy*dy)**0.5
+        assert length > 0
+        ux, uy = dx/length, dy/length
+        triangle = f'{bx},{by} {bx-9*ux+4*uy},{by-9*uy-4*ux} {bx-9*ux-4*uy},{by-9*uy+4*ux}'
+        parts.append(f'<polygon points="{triangle}" fill="{color}"/>')
+
+
+def node(x, y, w, h, lines, fill=SKILL, size=24):
+    rect(x, y, w, h, fill)
+    lines = [lines] if isinstance(lines, str) else lines
+    text(x+w/2, y+h/2+size*.34-(len(lines)-1)*14, lines, size, anchor='middle', gap=28)
 
 
 def build():
     parts.clear()
     parts.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="title desc">')
-    parts.append('<title id="title">Scientist-directed collaboration architecture</title><desc id="desc">Three panels show an iterative research workflow, scientist control through host agents and durable project records, and an optional two-round independent review process. The workflow is instructional and host-mediated, not an automated research service.</desc>')
+    parts.append('<title id="title">Co-Investigator architecture</title><desc id="desc">A scientist directs Codex or Claude Code through goals, methods, preferences, and feedback. The host applies interacting scientific skills, invokes executable tools, and maintains project context linked to preserved evidence. Plans and interpretation return to the scientist. Independent reviewers operate in separate contexts on request. The scientist performs experiments and supplies observations.</desc>')
     parts.append('<g font-family="Helvetica, Arial, sans-serif">')
     rect(0, 0, W, H, '#ffffff', '#ffffff', 0)
-    panel('a', 'Research cycle directed by the scientist', 12, 290)
-    text(36, 78, 'The scientist sets the question, methods, acceptance criteria, and next decision.', 20)
-    nodes = [
-        ('Inspect evidence', ['Literature and', 'source records'], BLUE),
-        ('Compare ideas', ['Alternatives and', 'predictions'], BLUE),
-        ('Agree a plan', ['Controls, endpoint,', 'replication'], GOLD),
-        ('Run experiment', ['Scientist performs', 'the experiment'], TEAL),
-        ('Interpret results', ['Analysis linked to', 'primary records'], BLUE),
-        ('Update context', ['Current view and', 'next question'], BLUE),
-    ]
-    for i, (title, lines, fill) in enumerate(nodes):
-        x = 36 + i*190
-        rect(x, 105, 177, 116, fill)
-        text(x+88.5, 135, title, 18, True, anchor='middle')
-        text(x+88.5, 167, lines, 17, anchor='middle', gap=25)
-        if i < len(nodes)-1:
-            arrow([(x+177, 163), (x+190, 163)])
-    arrow([(1074, 222), (1074, 269), (124, 269), (124, 222)])
-    rect(364, 251, 470, 35, '#ffffff', '#ffffff', 0)
-    text(599, 275, 'New evidence informs the next question', 19, anchor='middle')
 
-    panel('b', 'Scientist control, host execution, and persistent records', 318, 414)
-    # Colors denote ownership/function; every card also has a textual label.
-    rect(36, 383, 290, 232, GOLD)
-    text(54, 414, 'SCIENTIST', 18, True)
-    text(54, 451, ['Scientific choices', 'Methods and evidence standards', 'Outputs and review preferences', 'Models, permissions, spending'], 18, gap=32)
-    text(54, 598, 'Recorded in collaboration.md', 17, color=MUTED)
+    # A single system boundary separates host-followed skills from the scientist,
+    # executable resources, durable records, and independent reviewer contexts.
+    rect(330, 80, 780, 650, '#ffffff', '#8798a4', 12)
+    text(720, 54, 'Co-Investigator', 34, True, anchor='middle')
+    rect(390, 115, 650, 90, '#e8edf1', '#8fa1ae', 3)
+    text(715, 150, 'Codex / Claude Code', 29, True, anchor='middle')
+    text(715, 182, 'Conversation · reasoning · tool execution', 24, anchor='middle')
 
-    rect(431, 383, 318, 232, BLUE)
-    text(449, 414, 'HOST: CODEX / CLAUDE CODE', 18, True)
-    text(449, 450, ['Conversation and reasoning', 'Project skills: instructions', 'Utilities: executable code', 'Available tools and permissions'], 18, gap=32)
-    text(449, 598, 'Reads files and performs tasks', 17, color=MUTED)
+    # The host routes the task to relevant skill instructions; the buses do not
+    # imply simultaneous worker agents or an autonomous scheduling service.
+    text(720, 245, 'Applies task-relevant skills', 23, color=MUTED, anchor='middle')
+    line([(715, 205), (715, 216)])
+    line([(355, 266), (1085, 266)])
+    arrow([(715, 253), (715, 266)])
+    line([(355, 266), (355, 646)])
+    line([(1085, 266), (1085, 646)])
+    for y in (332, 422, 512, 646):
+        arrow([(355, y), (380, y)])
+    for y in (397, 512, 646):
+        arrow([(1085, y), (1050, y)])
 
-    rect(854, 383, 310, 232, TEAL)
-    text(872, 414, 'DURABLE PROJECT FILES', 18, True)
-    text(872, 450, ['Preferences and decisions', 'Current view and task log', 'Evidence and primary records', 'Analyses and review records'], 18, gap=32)
-    text(872, 598, 'Context links to detailed evidence', 17, color=MUTED)
-    arrow([(326, 482), (431, 482)])
-    text(378, 465, 'directs', 16, anchor='middle')
-    arrow([(749, 471), (854, 471)])
-    text(801, 431, ['writes', 'outputs'], 16, anchor='middle', gap=20)
-    arrow([(854, 540), (749, 540)])
-    text(801, 565, 'reads', 16, anchor='middle')
-    rect(36, 639, 1128, 70, '#f6f8fa')
-    text(54, 667, 'EXTEND THE PROJECT', 17, True)
-    text(54, 692, 'Describe a task → add or adapt a skill/tool → check its behavior → register inputs, assumptions, and use', 18)
+    node(380, 300, 300, 64, 'Retrieve & read papers')
+    node(380, 390, 300, 64, 'Literature synthesis')
+    node(380, 480, 300, 64, 'Citation validation')
+    node(750, 300, 300, 154, ['Experiment cycle', 'Plan · predict', 'Analyze · interpret'])
+    node(750, 480, 300, 64, 'Scientific writing')
+    arrow([(530, 364), (530, 390)])
+    arrow([(530, 454), (530, 480)])
+    arrow([(680, 422), (750, 422)], both=True)
+    arrow([(900, 454), (900, 480)])
+    arrow([(680, 512), (750, 512)])
+    text(715, 575, 'Extend and apply project tools', 23, color=MUTED, anchor='middle')
+    node(380, 602, 300, 88, ['Scientific tool', 'building'])
+    node(750, 602, 300, 88, ['sgRNA sequence', 'verification'])
+    text(715, 716, 'Project-local skills · shared across both hosts', 22, color=MUTED, anchor='middle')
 
-    panel('c', 'Independent review on request', 748, 287)
-    text(36, 811, 'Scientist selects scope, depth, and models; the host provides separate reviewer contexts.', 19)
-    rect(36, 836, 353, 112, BLUE)
-    text(54, 865, 'THREE INDEPENDENT LENSES', 17, True)
-    text(54, 895, ['Evidence • Methods • Interpretation', 'Each reviewer works separately'], 18, gap=27)
-    rect(434, 836, 324, 112, GOLD)
-    text(452, 865, 'EDITORIAL DECISION', 17, True)
-    text(452, 895, ['Accept, partly accept, or decline', 'Record evidence and rationale'], 18, gap=27)
-    rect(803, 836, 361, 112, TEAL)
-    text(821, 865, 'REVISION AND RESPONSE', 17, True)
-    text(821, 895, ['Apply and verify accepted changes', 'Preserve the response ledger'], 18, gap=27)
-    arrow([(389, 891), (434, 891)])
-    arrow([(758, 891), (803, 891)])
-    arrow([(983, 949), (983, 999), (212, 999), (212, 949)], dashed=True)
-    rect(310, 979, 580, 35, '#ffffff', '#ffffff', 0)
-    text(600, 1003, 'Round 2: new independent reviewers reassess the revision', 18, anchor='middle')
-    text(600, 1066, 'Arrows describe agent-followed procedures.', 17, color=MUTED, anchor='middle')
+    # Human control and the output/feedback loop occupy the left side.
+    text(145, 54, 'Scientist', 29, True, anchor='middle')
+    rect(30, 95, 235, 205, HUMAN, '#aac0d6')
+    text(147, 132, 'Research direction', 24, True, anchor='middle')
+    text(147, 173, ['Question & goals', 'Methods & preferences', 'Models & permissions', 'Feedback & decisions'], 22, anchor='middle', gap=32)
+    arrow([(265, 160), (390, 160)], '#5e7f9e')
+    text(327, 143, 'request', 22, color='#5e7f9e', anchor='middle')
+    parts.append('<circle cx="145" cy="365" r="22" fill="#9ab7d1"/>')
+    parts.append('<path d="M105 428 L105 412 C105 386 185 386 185 412 L185 428 Z" fill="#9ab7d1"/>')
+    arrow([(145, 342), (145, 300)], '#5e7f9e')
+    node(30, 520, 235, 108, ['Plans & hypotheses', 'Analyses &', 'interpretation'], HUMAN, 23)
+    arrow([(390, 185), (290, 185), (290, 574), (265, 574)], '#5e7f9e')
+    arrow([(145, 520), (145, 440)], '#5e7f9e')
+    text(162, 480, 'discuss', 22, color='#5e7f9e')
+    node(30, 725, 235, 85, ['Experiments', 'Scientist executes'], HUMAN, 23)
+    arrow([(105, 410), (14, 410), (14, 768), (30, 768)], '#5e7f9e')
+
+    # Executable utilities and persistent files have distinct visual types.
+    rect(1175, 110, 245, 230, TOOL, '#a6afb8')
+    text(1297, 143, 'Executable tools', 24, True, anchor='middle')
+    line([(1175, 160), (1420, 160)], '#b7c0c7')
+    text(1297, 196, ['PDF retrieval', 'Text / table extraction', 'Sequence checks', 'New project tools'], 22, anchor='middle', gap=37)
+    arrow([(1040, 160), (1175, 160)], both=True)
+    text(1107, 136, 'uses', 22, color=MUTED, anchor='middle')
+
+    # Record shapes use a ruled header to distinguish files from skill nodes.
+    rect(1175, 465, 245, 198, RECORD, '#a2bba9')
+    text(1297, 501, 'Project memory', 24, True, anchor='middle')
+    line([(1175, 516), (1420, 516)], '#b0c8b6')
+    text(1297, 549, ['Context & preferences', 'Decisions & task log', 'Outputs & provenance'], 22, anchor='middle', gap=35)
+    arrow([(1040, 190), (1148, 190), (1148, 565), (1175, 565)], both=True)
+    text(1297, 425, ['Reads / maintains', 'durable files'], 22, color=MUTED, anchor='middle', gap=27)
+    rect(1175, 735, 245, 112, RECORD, '#a2bba9')
+    text(1297, 769, 'Primary evidence', 24, True, anchor='middle')
+    text(1297, 806, ['Literature · raw data', 'Experimental records'], 22, anchor='middle', gap=27)
+    arrow([(1297, 735), (1297, 663)])
+    text(1313, 705, 'informs', 22, color=MUTED)
+    arrow([(145, 810), (145, 1006), (1297, 1006), (1297, 847)], '#5e7f9e')
+    rect(563, 990, 320, 32, '#ffffff', '#ffffff', 0)
+    text(723, 1014, 'Supplied observations & data', 22, color='#5e7f9e', anchor='middle')
+
+    # Review is a branch using independent contexts, not routine skill self-review.
+    rect(380, 808, 670, 152, '#ffffff', '#9b91af', 7, True)
+    text(715, 781, 'Independent review · on request', 26, True, color='#695b80', anchor='middle')
+    for x, label in [(400, 'Evidence'), (620, 'Methods'), (840, 'Interpretation')]:
+        node(x, 829, 190, 47, label, REVIEW, 23)
+        arrow([(x+95, 876), (x+95, 899)], '#8d829f')
+    rect(400, 899, 630, 40, REVIEW, '#c7bfd4')
+    text(715, 927, 'Editorial decisions & response ledger', 23, anchor='middle')
+    text(715, 988, 'Two rounds; new reviewer contexts in round 2', 22, color='#695b80', anchor='middle')
+    arrow([(410, 205), (410, 224), (310, 224), (310, 854), (380, 854)], '#8d829f', True)
+    arrow([(1050, 919), (1130, 919), (1130, 213), (1000, 213), (1000, 205)], '#8d829f', True)
+
     parts.append('</g></svg>')
     svg = '\n'.join(parts)+'\n'
     root = ET.fromstring(svg)
     assert root.attrib['viewBox'] == f'0 0 {W} {H}'
-    assert len(root.findall('.//{http://www.w3.org/2000/svg}text')) >= 50
-    assert 'Run experiment' in svg and 'Independent review on request' in svg
+    assert len(root.findall('.//{http://www.w3.org/2000/svg}text')) >= 40
+    for label in ('Retrieve &amp; read papers', 'Literature synthesis', 'Experiment cycle', 'Citation validation', 'Scientific writing', 'Scientific tool', 'sgRNA sequence', 'Independent review'):
+        assert label in svg, label
     return svg
 
 
@@ -135,6 +170,7 @@ def main():
     if args.render:
         from reportlab import rl_config
         from reportlab.graphics import renderPDF
+        from reportlab.pdfgen.canvas import Canvas
         from svglib.svglib import svg2rlg
         if not shutil.which('pdftoppm'):
             parser.error('--render requires pdftoppm from Poppler')
@@ -144,13 +180,16 @@ def main():
     if args.render:
         drawing = svg2rlg(str(svg_path))
         assert drawing is not None and (drawing.width, drawing.height) == (W, H)
-        # Scale to a 183 mm double-column figure, preserving editable vector text.
         scale = (183/25.4*72)/W
         drawing.scale(scale, scale)
         drawing.width *= scale
         drawing.height *= scale
         pdf_path = OUT / 'architecture.pdf'
-        renderPDF.drawToFile(drawing, str(pdf_path), title='Scientist-directed collaboration architecture')
+        canvas = Canvas(str(pdf_path), pagesize=(drawing.width, drawing.height), invariant=1)
+        canvas.setTitle('Co-Investigator architecture')
+        renderPDF.draw(drawing, canvas, 0, 0)
+        canvas.showPage()
+        canvas.save()
         subprocess.run(['pdftoppm', '-singlefile', '-r', '200', '-png', str(pdf_path), str(OUT/'architecture')], check=True)
         assert pdf_path.read_bytes().startswith(b'%PDF-')
         assert (OUT/'architecture.png').read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
