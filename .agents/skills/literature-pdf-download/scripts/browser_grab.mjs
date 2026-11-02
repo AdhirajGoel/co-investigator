@@ -127,6 +127,10 @@ async function main() {
   if (!root || !profile) throw new Error('Provide corpus root and task profile');
   assertTaskBrowser(profile, port);
   const records = loadRecords(recordsPath, root);
+  function checkpoint() {
+    fs.writeFileSync(recordsPath + '.tmp', JSON.stringify(records, null, 2) + '\n');
+    fs.renameSync(recordsPath + '.tmp', recordsPath);
+  }
   const { chromium } = await import('playwright');
   const browser = await chromium.connectOverCDP('http://127.0.0.1:' + port);
   let page;
@@ -141,20 +145,20 @@ async function main() {
       } catch (error) { note = String(error); humanAction = error.code === 'HUMAN_ACTION_REQUIRED'; }
       rec.attempts.push({ route: 'dedicated-browser', outcome: saved ? 'downloaded' : 'failed', timestamp: new Date().toISOString(), note: saved ? '' : note });
       if (saved) { rec.route_used = 'dedicated-browser'; ok++; }
+      checkpoint();
       console.log(`${rec.id}: ${saved ? 'downloaded' : note}`);
       if (humanAction) break;
     }
   } finally {
+    checkpoint();
     if (!humanAction) await page?.close().catch(() => {});
     await browser.close(); // Disconnect; retain the dedicated browser for user-directed cleanup.
-    fs.writeFileSync(recordsPath + '.tmp', JSON.stringify(records, null, 2) + '\n');
-    fs.renameSync(recordsPath + '.tmp', recordsPath);
   }
   console.log(`${ok}/${records.length} downloaded via browser`);
   const audit = spawnSync(python, [path.join(dir, 'corpus.py'), path.resolve(recordsPath), '--root', path.resolve(root)], { stdio: 'inherit' });
   return audit.status ?? 1;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && fs.realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
   process.exitCode = await main();
 }

@@ -16,18 +16,13 @@ Summarize the choices before creating the workspace. The scientist’s instructi
 
 ## 2. Check prerequisites
 
-Run `python3 --version` and `python3 tools/workspace.py check .`. Python 3.10+ is required. If missing, guide installation using the current official Python macOS instructions. Codex or Claude Code must already be installed and signed in; use the host’s normal login flow if necessary. Never collect account credentials.
+From this checkout, run `python3 --version` and `python3 tools/workspace.py check .`. Python 3.10+ is required. If missing, guide installation using the current official Python macOS instructions. Codex or Claude Code must already be installed and signed in; use the host’s normal login flow if necessary. Never collect account credentials.
 
-The core framework has no package dependencies. Install only the optional tools the scientist needs:
-
-- **Read and render PDFs:** check `pdfinfo`, `pdftotext`, and `pdftoppm`. If absent, propose `brew install poppler` when Homebrew is already present. Obtain permission before installing a system package manager.
-- **Extract complex PDF tables or verify cloning sequences:** create `.venv` in the new workspace with `python3 -m venv .venv`, then run `.venv/bin/python -m pip install -r requirements-tools.txt`. This installs pdfplumber and openpyxl with their dependencies.
-- **Download literature:** public Europe PMC/DOI routes need `curl` and Poppler’s `pdfinfo` for verification; Unpaywall additionally needs the scientist’s contact email, kept in local configuration. A browser route is optional, requires separate permission, and uses a dedicated temporary profile. Read that skill before installing browser dependencies.
-- **PubMed:** prefer an available PubMed connector. If none is configured, the agent can use PubMed’s public pages or NCBI E-utilities without an API key at the documented anonymous rate. Never label an alternate database lookup as PubMed validation.
+The core framework has no package dependencies. Check optional capabilities now, but create the workspace before installing its tools or creating `.venv`; the initializer requires a destination that does not exist.
 
 ## 3. Create and personalize
 
-Run, replacing the example arguments with the scientist’s choices:
+From this checkout, run, replacing the example arguments with the scientist’s choices:
 
 ```sh
 python3 tools/workspace.py init /path/to/new-project --name "Project title" --question "Research question"
@@ -37,10 +32,25 @@ The initializer refuses an existing destination. It creates a project-local copy
 
 Edit the new workspace’s `context/project-context.md` and `context/collaboration.md` with the agreed choices. Record available connectors and dependencies in `tools/registry.md`. Store secrets only in untracked `.env` or the host’s secure credential store. Never change a global skill to customize one project.
 
-## 4. Verify and hand over
+## 4. Install agreed optional tools
 
-Run `python3 tools/workspace.py check /path/to/new-project`. Confirm the Codex and Claude skill copies resolve to identical content. From the new project, read `AGENTS.md`, the context file, and collaboration rules as a new session would. Ask the agent to identify the relevant skill for a literature-reading request and a review request; check the names against `docs/skills.md`. If skill menus have not refreshed, restart the agent in the new folder. Explicit file loading remains available.
+Enter the initialized workspace before running any installation commands:
 
-Exercise each installed optional tool with a disposable fixture before using research data. A missing optional dependency must be reported as unavailable, never as a successful check. Demonstrate one safe next action using the scientist’s actual stated objective; do not invent results to fill the workspace.
+```sh
+cd /path/to/new-project
+```
+
+The core framework has no package dependencies. Install only the optional tools the scientist needs:
+
+- **Read and render PDFs:** check `pdfinfo`, `pdftotext`, and `pdftoppm`. If absent, propose `brew install poppler` when Homebrew is already present. Obtain permission before installing a system package manager.
+- **Extract complex PDF tables or verify cloning sequences:** create `.venv` in the new workspace with `python3 -m venv .venv`, then run `.venv/bin/python -m pip install -r requirements-tools.txt`. This installs pdfplumber and openpyxl with their dependencies.
+- **Download literature:** public Europe PMC/DOI routes need `curl` and Poppler’s `pdfinfo` for verification; Unpaywall additionally needs the scientist’s contact email, kept in local configuration. A browser route is optional, requires separate permission, and uses a dedicated temporary profile. Read that skill before installing browser dependencies.
+- **PubMed:** prefer an available PubMed connector. If none is configured, the agent can use PubMed’s public pages or NCBI E-utilities without an API key at the documented anonymous rate. Never label an alternate database lookup as PubMed validation.
+
+## 5. Verify and hand over
+
+From the new workspace, run `.venv/bin/python tools/workspace.py check .` if you created `.venv`; otherwise run `python3 tools/workspace.py check .`. The check reports Python packages for the interpreter that runs it. Confirm the Codex and Claude skill copies resolve to identical content. From the new project, read `AGENTS.md`, the context file, and collaboration rules as a new session would. Ask the agent to identify the relevant skill for a literature-reading request and a review request; check the names against `docs/skills.md`. If skill menus have not refreshed, restart the agent in the new folder. Explicit file loading remains available.
+
+Exercise each installed optional tool with a disposable fixture before using research data. Use `.venv/bin/python` for tools installed in the project environment; activation is not required. A missing optional dependency must be reported as unavailable, never as a successful check. Demonstrate one safe next action using the scientist’s actual stated objective; do not invent results to fill the workspace.
 
 Tell the scientist where the project lives, which capabilities work, and what the next agreed action is. Preserve the onboarding choices in the project so another agent can continue.

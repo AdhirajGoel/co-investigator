@@ -13,7 +13,7 @@ Run after drafting and before final saving or delivery of an in-scope life-scien
 
 Do not run for non-life-sciences artifacts. For a life-sciences artifact, first state-check whether it contains citations or literature/evidence-backed claims. If neither is present, no-op.
 
-Honor explicit user, journal, template, and project instructions. A current citation-status header may be trusted only while the cited references and citation-bearing claims are unchanged.
+Honor explicit user, journal, template, and project instructions. Trust a current success header only when it covers every retained in-scope claim and both the cited references and citation-bearing claims are unchanged. An incomplete or unavailable status remains unresolved.
 
 ## Validation workflow
 
@@ -21,7 +21,7 @@ Honor explicit user, journal, template, and project instructions. A current cita
 2. Build a temporary, private claim–evidence–citation matrix. Do not add it to the artifact or save it unless the user explicitly requests it or project policy requires it.
 3. For each scholarly article, query PubMed. Confirm that the article record exists and that its title and abstract support the associated claim. Use abstracts for claims they directly support. For a claim about a specific method, figure, numerical result, or causal mechanism, inspect the supporting full-text passage; if unavailable, mark that claim unverified rather than treating an abstract match as validation.
 4. Do not use model memory as evidence. If an article cannot be verified in PubMed, prefer a suitable PubMed-indexed replacement. Retain a non-PubMed source only when it is genuinely appropriate (for example, an official method, database, protocol, or website), exists, and directly supports the claim.
-5. If a citation or claim is unsupported, find a valid replacement. If none exists, revise or remove the unsupported citation or claim, then revalidate the changed material.
+5. If a citation or claim is unsupported, find a valid replacement. If none exists, revise or remove the unsupported citation or claim, then revalidate the changed material. If a claim remains unverified because its supporting evidence is unavailable, label it unverified and use the incomplete status below while it remains in the artifact.
 
 ## PubMed unavailable
 
@@ -31,10 +31,16 @@ If PubMed cannot be queried, still save or deliver the artifact. Add the unavail
 
 ## Status marker
 
-For internal life-sciences reports, add exactly one current status header near the beginning of the artifact:
+For internal life-sciences reports, add exactly one current status header near the beginning of the artifact. Use the success marker only after every retained in-scope claim has been verified against adequate inspected evidence:
 
 ```text
 Citation status: validated against PubMed and cited primary sources. Revalidate after citation or claim changes.
+```
+
+If PubMed was available but any retained in-scope claim remains unverified, use:
+
+```text
+Citation status: incomplete; retained claims remain unverified: [identify the claims and briefly explain the missing evidence].
 ```
 
 If PubMed was unavailable, use:

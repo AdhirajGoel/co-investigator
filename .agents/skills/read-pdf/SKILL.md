@@ -40,11 +40,13 @@ python3 "$SKILL_DIR/pdf_cache.py" render "$PDF" --pages 4,7-10
 
 Inspect the returned PNG paths with an available vision reader. Also inspect rendered pages when the answer depends on tables, figures, formulas, handwriting, multi-column order, small print, or exact layout. If vision or OCR is unavailable, state which pages remain unresolved and do not claim complete coverage.
 
-For detailed tables, use the bundled fallback when useful:
+For detailed tables, run the bundled fallback from the project root using the environment containing pdfplumber (`requirements-tools.txt`):
 
 ```bash
-python3 "$SKILL_DIR/extract_tables.py" "$PDF" --pages 5-20 --text
+.venv/bin/python "$SKILL_DIR/extract_tables.py" "$PDF" --pages 5-20 --text
 ```
+
+If that environment or pdfplumber is unavailable, report the missing optional tool and use the verified cache or rendered pages; do not install globally.
 
 ## Answer questions
 

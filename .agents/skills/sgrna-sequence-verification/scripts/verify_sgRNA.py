@@ -136,15 +136,20 @@ def main():
     if not os.path.isdir(args.fasta_dir):
         ap.error(f"FASTA directory does not exist: {args.fasta_dir}")
 
+    source_wb = openpyxl.load_workbook(args.xlsx, data_only=False)
     wb = openpyxl.load_workbook(args.xlsx, data_only=True)
     if args.sheet not in wb.sheetnames:
         ap.error(f"Sheet '{args.sheet}' not found. Sheets: {wb.sheetnames}")
     ws = wb[args.sheet]
-    rows = [row for row in ws.iter_rows(values_only=True) if any(c is not None for c in row)]
+    # Formula-only rows must remain visible even when Excel has not cached results.
+    rows = [pair for pair in zip(source_wb[args.sheet].iter_rows(), ws.iter_rows())
+            if any(cell.value is not None for cell in pair[0])]
+    source_wb.close()
+    wb.close()
     if not rows:
         ap.error(f"Sheet '{args.sheet}' has no non-empty rows")
 
-    header = rows[0]
+    header = tuple(cell.value for cell in rows[0][1])
     if not any(value is not None and str(value).strip() for value in header):
         ap.error(f"Sheet '{args.sheet}' has no header row")
 
@@ -152,7 +157,13 @@ def main():
     si = find_col(header, "Spacer (final)", args.spacer_col)
     gi = find_col(header, "Gene", args.gene_col, optional=True)
 
-    data = rows[1:]
+    data = []
+    for source, cached in rows[1:]:
+        for index in (pi, si):
+            cell, value = source[index], cached[index]
+            if cell.data_type == "f" and (value.data_type == "e" or value.value is None or not str(value.value).strip()):
+                ap.error(f"Cell {cell.coordinate} has no usable cached formula value; recalculate and save the workbook or replace the formula with its value")
+        data.append(tuple(cell.value for cell in cached))
     if any(pi >= len(row) or row[pi] is None or not str(row[pi]).strip() for row in data):
         ap.error("Every non-empty data row must contain a plasmid ID")
     fasta_paths = sorted(
