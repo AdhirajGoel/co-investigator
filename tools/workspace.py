@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a separate scientific workspace or check its local setup."""
+"""Create a Co-Investigator research workspace or check its local setup."""
 from __future__ import annotations
 import argparse
 import importlib.util

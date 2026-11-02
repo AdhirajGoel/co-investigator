@@ -1,4 +1,4 @@
-# Set up a research workspace
+# Set up Co-Investigator for your research
 
 This is the procedure for the scientist’s coding agent. Work in conversation; the scientist does not need to run commands or understand the file layout.
 

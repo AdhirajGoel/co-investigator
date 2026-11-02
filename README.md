@@ -1,6 +1,6 @@
-# Scientific collaboration workspace
+# Co-Investigator
 
-A configurable workspace for experimental scientists working with Codex or Claude Code. The scientist sets the questions, evidence standards, and working methods. The agent helps research, build tools, analyze results, and keep the project’s understanding current.
+A configurable scientific collaboration workspace for experimental scientists working with Codex or Claude Code. The scientist sets the questions, evidence standards, and working methods. The agent helps research, build tools, analyze results, and keep the project’s understanding current.
 
 This framework grew out of day-to-day experimental biology work where a fixed research assistant offered too little control over methods and outputs. It packages the reusable collaboration structure and scientific skills. The original project’s research content and data are excluded.
 
@@ -39,4 +39,4 @@ python3 -m unittest discover -s tests -v
 
 These checks exercise workspace creation and tools with disposable software fixtures. There is no scientific demo or example research dataset.
 
-[MIT license](LICENSE). This is a static release; it carries no ongoing maintenance commitment. The project name is provisional.
+[MIT license](LICENSE). This is a static release; it carries no ongoing maintenance commitment.

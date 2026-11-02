@@ -1,4 +1,4 @@
-# Architecture figure
+# Co-Investigator architecture figure
 
 `architecture.svg` is the editable original; text remains text and all artwork is vector. `architecture.pdf` is a vector export at 183 mm width, and `architecture.png` is its 200 dpi raster preview. The figure contains conceptual workflow information only, with no research data or measured results. Its caption and implementation mapping are in [architecture.md](../architecture.md).
 

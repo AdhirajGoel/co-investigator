@@ -5,7 +5,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 from urllib.parse import urlparse
-from corpus import load_records,verify,now,reconcile
+from corpus import load_records,verify,now,reconcile,atomic_json
 
 
 def download(record,min_kb):
@@ -54,7 +54,9 @@ def main():
         records=load_records(a.records,a.root)
         if a.ids and set(a.ids)-{r['id'] for r in records}: ap.error('Unknown record ID requested')
         for r in records:
-            if not a.ids or r['id'] in a.ids: download(r,a.min_kb)
+            if not a.ids or r['id'] in a.ids:
+                try: download(r,a.min_kb)
+                finally: atomic_json(a.records,records)
         return 0 if reconcile(records,a.records,a.root,a.min_kb) else 1
     except (OSError,ValueError,subprocess.TimeoutExpired) as e: ap.exit(1,str(e)+'\n')
 

@@ -10,6 +10,7 @@ The verifier is deliberately fail-closed: empty input, invalid spacers, missing 
 ambiguous FASTA mappings, and malformed rows cannot produce an ALL PASS result.
 """
 import argparse
+from collections import Counter
 import csv
 import glob
 import os
@@ -61,18 +62,21 @@ def load_fasta(path):
     return "".join(seq).upper()
 
 
-def find_col(header, wanted, override):
-    """Return a column index, or exit with an actionable schema error."""
-    if override:
-        for i, value in enumerate(header):
-            if value is not None and str(value).strip() == override:
-                return i
-        sys.exit(f"Column '{override}' not found. Headers: {header}")
-    for i, value in enumerate(header):
-        if value is not None and wanted.lower() in str(value).lower():
-            return i
+def find_col(header, wanted, override, optional=False):
+    """Return a unique column index, or exit with an actionable schema error."""
+    target = (override if override is not None else wanted).strip().casefold()
+    names = [str(value).strip().casefold() if value is not None else "" for value in header]
+    matches = [i for i, name in enumerate(names) if name == target]
+    if not matches and override is None:
+        matches = [i for i, name in enumerate(names) if target in name]
+    if len(matches) == 1:
+        return matches[0]
+    if len(matches) > 1:
+        sys.exit(f"Ambiguous column '{override or wanted}'. Headers: {header}")
+    if optional and override is None:
+        return None
     sys.exit(
-        f"Could not auto-detect a '{wanted}' column. Headers: {header}\n"
+        f"Column '{override or wanted}' not found. Headers: {header}\n"
         f"Pass it explicitly with the matching --*-col flag."
     )
 
@@ -146,10 +150,7 @@ def main():
 
     pi = find_col(header, "Plasmid", args.plasmid_col)
     si = find_col(header, "Spacer (final)", args.spacer_col)
-    try:
-        gi = find_col(header, "Gene", args.gene_col)
-    except SystemExit:
-        gi = None
+    gi = find_col(header, "Gene", args.gene_col, optional=True)
 
     data = rows[1:]
     if any(pi >= len(row) or row[pi] is None or not str(row[pi]).strip() for row in data):
@@ -160,10 +161,12 @@ def main():
         + glob.glob(os.path.join(args.fasta_dir, "*.fas"))
     )
 
+    mappings = [resolve_fasta(str(row[pi]).strip(), fasta_paths) for row in data]
+    fasta_uses = Counter(os.path.realpath(path) for path, _ in mappings if path)
     results = []
     all_pass = bool(data)
     seen_ids = set()
-    for row in data:
+    for row, (fasta_path, mapping_status) in zip(data, mappings):
         plasmid = str(row[pi]).strip()
         gene = str(row[gi]).strip() if gi is not None and row[gi] is not None else ""
         raw_spacer = row[si] if si < len(row) else None
@@ -207,7 +210,8 @@ def main():
 
         spacer_len = len(spacer)
         expected = args.backbone_len + spacer_len
-        fasta_path, mapping_status = resolve_fasta(plasmid, fasta_paths)
+        if fasta_path and fasta_uses[os.path.realpath(fasta_path)] > 1:
+            fasta_path, mapping_status = None, "AMBIGUOUS_FASTA"
         if not fasta_path:
             results.append(
                 dict(
